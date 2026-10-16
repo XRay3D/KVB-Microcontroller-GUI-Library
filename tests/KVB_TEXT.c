@@ -20,13 +20,32 @@
 //###########################################################################################
 #include "KVB_TEXT.h"
 //###########################################################################################
+//	Строки, зависящие от сборки. Значения передаёт CMake (tests/CMakeLists.txt)
+//###########################################################################################
+#ifndef KVB_MCU_NAME
+#if defined(__AVR__)
+#define KVB_MCU_NAME "ATmega128"
+#else
+#define KVB_MCU_NAME "STM32F407"
+#endif
+#endif
+#ifndef KVB_COMPILER_NAME
+#define KVB_COMPILER_NAME "GCC"
+#endif
+#ifndef KVB_BUILD_NAME
+#define KVB_BUILD_NAME "CMake"
+#endif
 //###########################################################################################
 //								Текст подключаемых строк
 //###########################################################################################
 const char str_KVB_en[] KVBMEM = "0123";
 const char str_fio_en[] KVBMEM = "Boruzdov Konstantin Vladimirovich";
 const char str_fio_ru[] KVBMEM = "Боруздов Константин Владимирович";
-const char str_prezent_ru[] KVBMEM = "Представляет, графическую библиотеку KVB №1.0, написанную исключительно в целочисленной математике на языке <C> в <GCC>";
+#if defined(__AVR__)
+const char str_prezent_ru[] KVBMEM = "Представляет, графическую библиотеку KVB 1.0, написанную исключительно в целочисленной математике на языке <C> в <" KVB_COMPILER_NAME ">";
+#else
+const char str_prezent_ru[] KVBMEM = "Представляет, графическую библиотеку KVB №1.0, написанную исключительно в целочисленной математике на языке <C> в <" KVB_COMPILER_NAME ">";
+#endif
 const char str_tel_ru[] KVBMEM = "Боруздов Константин\nтел. +7 965-363-45-29";
 const char str_test1a_ru[] KVBMEM = "Перенос по словам";
 const char str_test1b_ru[] KVBMEM = "Текст с тенью";
@@ -40,8 +59,8 @@ const char str_button5_ru[] KVBMEM = "ВНИЗ";
 const char str_button6_ru[] KVBMEM = "СТАРТ";
 const char str_button7_ru[] KVBMEM = "ЗВУКИ";
 const char str_button8_ru[] KVBMEM = "АУДИО";
-const char str_LCD_en[] KVBMEM = "KVB-16bit-LCD\nSTM32F407VET6";
-const char str_IDE_en[] KVBMEM = "Stm32CubeIDE 2";
+const char str_LCD_en[] KVBMEM = "KVB-16bit-LCD\n" KVB_MCU_NAME;
+const char str_IDE_en[] KVBMEM = KVB_BUILD_NAME;
 const char str_nu1[] KVBMEM = "1";
 const char str_nu2[] KVBMEM = "2";
 const char str_nu3[] KVBMEM = "3";
