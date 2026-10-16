@@ -116,8 +116,11 @@ int main(void)
   //###########################################################################################
   //														Запуск графического теста
   //###########################################################################################
-  	lcd_Test480x320Landscape();
-  	//lcd_Test320x240Landscape();
+#if defined(USE_ILI9325) || defined(USE_ILI9341)
+  	lcd_Test320x240Landscape();//Панели 320x240
+#else
+  	lcd_Test480x320Landscape();//Панели 480x320 и больше
+#endif
   //###########################################################################################
   //###########################################################################################
   /* USER CODE END 2 */
@@ -192,11 +195,7 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOE_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
+  KVB_BOARD_GPIO_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(BL_PWM_GPIO_Port, BL_PWM_Pin, GPIO_PIN_RESET);
@@ -232,7 +231,7 @@ static void MX_FSMC_Init(void)
   hsram1.Instance = FSMC_NORSRAM_DEVICE;
   hsram1.Extended = FSMC_NORSRAM_EXTENDED_DEVICE;
   /* hsram1.Init */
-  hsram1.Init.NSBank = FSMC_NORSRAM_BANK1;
+  hsram1.Init.NSBank = KVB_BOARD_FSMC_BANK;
   hsram1.Init.DataAddressMux = FSMC_DATA_ADDRESS_MUX_DISABLE;
   hsram1.Init.MemoryType = FSMC_MEMORY_TYPE_SRAM;
   hsram1.Init.MemoryDataWidth = FSMC_NORSRAM_MEM_BUS_WIDTH_16;

@@ -57,8 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define BL_PWM_Pin GPIO_PIN_1
-#define BL_PWM_GPIO_Port GPIOB
+/* Board pins (BL_PWM, FSMC RS/CS) live in boards/<BOARD>/board.h */
+#include "board.h"
 
 /* USER CODE BEGIN Private defines */
 
