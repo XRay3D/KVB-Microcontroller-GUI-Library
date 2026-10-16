@@ -28,6 +28,11 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "^avr" OR CMAKE_C_COMPILER MATCHES "avr-gcc")
   set(_kvb_default_board ATMEGA128)
 endif()
 
+# A plain variable set by the parent project wins. Passing it as the cache
+# default keeps it even under policy CMP0126 OLD (projects older than 3.21).
+if(NOT "${KVB_LCD_BOARD}" STREQUAL "")
+  set(_kvb_default_board "${KVB_LCD_BOARD}")
+endif()
 set(KVB_LCD_BOARD "${_kvb_default_board}" CACHE STRING "KVB_LCD target board")
 set_property(CACHE KVB_LCD_BOARD PROPERTY STRINGS ${KVB_LCD_BOARDS})
 if(NOT KVB_LCD_BOARD IN_LIST KVB_LCD_BOARDS)
@@ -38,7 +43,11 @@ endif()
 include("${KVB_LCD_BOARDS_DIR}/${KVB_LCD_BOARD}.cmake")
 
 # --- Controller --------------------------------------------------------------
-set(KVB_LCD_CONTROLLER "ILI9486" CACHE STRING "KVB_LCD display controller")
+set(_kvb_default_controller ILI9486)
+if(NOT "${KVB_LCD_CONTROLLER}" STREQUAL "")
+  set(_kvb_default_controller "${KVB_LCD_CONTROLLER}")
+endif()
+set(KVB_LCD_CONTROLLER "${_kvb_default_controller}" CACHE STRING "KVB_LCD display controller")
 set_property(CACHE KVB_LCD_CONTROLLER PROPERTY STRINGS ${KVB_LCD_CONTROLLERS})
 if(NOT KVB_LCD_CONTROLLER IN_LIST KVB_LCD_CONTROLLERS)
   string(REPLACE ";" ", " _kvb_list "${KVB_LCD_CONTROLLERS}")
@@ -46,7 +55,7 @@ if(NOT KVB_LCD_CONTROLLER IN_LIST KVB_LCD_CONTROLLERS)
     "KVB_LCD: set KVB_LCD_CONTROLLER to one of: ${_kvb_list} (current value: '${KVB_LCD_CONTROLLER}')")
 endif()
 
-set(KVB_LCD_HAL_TARGET "" CACHE STRING
+set(KVB_LCD_HAL_TARGET "${KVB_LCD_HAL_TARGET}" CACHE STRING
   "STM32 HAL target linked after the KVB_LCD binary (optional)")
 
 # --- Prebuilt binary flavour ---------------------------------------------------
