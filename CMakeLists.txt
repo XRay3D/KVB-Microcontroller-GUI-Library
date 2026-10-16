@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.21)
 project(KVB_LCD
   VERSION 1.0.0
   DESCRIPTION "KVB graphics library for 16-bit parallel LCD panels on STM32F407 and ATmega128"
-  HOMEPAGE_URL "https://github.com/XRay3D/KVB-Microcontroller-GUI-Library"
+  HOMEPAGE_URL "https://github.com/Konstantin-kvb/KVB-Microcontroller-GUI-Library"
   LANGUAGES C)
 
 option(KVB_LCD_BUILD_EXAMPLES "Build the demo firmware for the selected board" ${PROJECT_IS_TOP_LEVEL})

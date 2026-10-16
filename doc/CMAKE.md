@@ -56,7 +56,7 @@ When another project includes KVB_LCD, examples, tests and install rules are off
 The library lives inside your repository and is versioned with it.
 
 ```bash
-git submodule add https://github.com/XRay3D/KVB-Microcontroller-GUI-Library.git external/KVB_LCD
+git submodule add https://github.com/Konstantin-kvb/KVB-Microcontroller-GUI-Library.git external/KVB_LCD
 ```
 
 ```cmake
@@ -76,7 +76,7 @@ CMake downloads the library during configuration.
 ```cmake
 include(FetchContent)
 FetchContent_Declare(KVB_LCD
-  GIT_REPOSITORY https://github.com/XRay3D/KVB-Microcontroller-GUI-Library.git
+  GIT_REPOSITORY https://github.com/Konstantin-kvb/KVB-Microcontroller-GUI-Library.git
   GIT_TAG        main   # use a tag or commit hash for reproducible builds
   GIT_SHALLOW    TRUE)
 
@@ -100,7 +100,7 @@ cmake -B build -DFETCHCONTENT_SOURCE_DIR_KVB_LCD=/path/to/KVB-Microcontroller-GU
 include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME KVB_LCD
-  GITHUB_REPOSITORY XRay3D/KVB-Microcontroller-GUI-Library
+  GITHUB_REPOSITORY Konstantin-kvb/KVB-Microcontroller-GUI-Library
   GIT_TAG main
   OPTIONS "KVB_LCD_BOARD BLACK_F407VET6" "KVB_LCD_CONTROLLER ILI9486")
 
